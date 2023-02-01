@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator TP4</title>
+
+    <style>
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .calculator {
+        background-color: #eef4fa;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+
+      .calculator input {
+        border: 0;
+        outline: 0;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        box-shadow: 1px 4px 6px -1px rgb(0 0 0 / 0.1),
+          0.3px -0.7px 4px -2px rgb(0 0 0 / 0.1);
+        background: transparent;
+        font-size: 20px;
+        color: #334155;
+        cursor: pointer;
+        margin: 7px;
+      }
+
+      input.equal {
+        width: 138px;
+      }
+
+      .screen {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0px;
+      }
+      .screen input {
+        flex: 1;
+        text-align: left;
+        padding: 2px 10px;
+        font-size: 40px;
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <div class="screen">
+          <input type="text" />
+        </div>
+
+        <div>
+          <input type="button" value="AC" />
+          <input type="button" value="DE" />
+          <input type="button" value="." />
+          <input type="button" value="/" />
+        </div>
+
+        <div>
+          <input type="button" value="7" />
+          <input type="button" value="8" />
+          <input type="button" value="9" />
+          <input type="button" value="*" />
+        </div>
+        <div>
+          <input type="button" value="4" />
+          <input type="button" value="5" />
+          <input type="button" value="6" />
+          <input type="button" value="-" />
+        </div>
+        <div>
+          <input type="button" value="1" />
+          <input type="button" value="2" />
+          <input type="button" value="3" />
+          <input type="button" value="+" />
+        </div>
+        <div>
+          <input type="button" value="00" />
+          <input type="button" value="0" />
+          <input type="button" value="=" class="equal" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var screen = document.querySelector(".screen input");
+      var buttons = document.querySelectorAll("input[type=button]");
+
+      buttons.forEach((btn) => btn.addEventListener("click", evaluate));
+
+      function evaluate(e) {
+        console.log(e.target.value);
+        var value = e.target.value;
+
+        if (value === "AC") {
+          screen.value = "";
+          return;
+        }
+
+        if (value === "DE") {
+          screen.value = screen.value.slice(0, -1);
+          return;
+        }
+
+        if (value === "=") {
+          var result = eval(screen.value);
+
+          if (typeof result === "number") {
+            screen.value = result;
+          } else {
+            screen.value = "";
+          }
+          return;
+        }
+
+        screen.value += value;
+      }
+    </script>
+  </body>
+</html>
